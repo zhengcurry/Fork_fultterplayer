@@ -16,6 +16,9 @@ rootProject.allprojects {
     repositories {
         google()
         mavenCentral()
+        flatDir {
+            dirs 'libs'
+        }
     }
 }
 
@@ -33,14 +36,32 @@ android {
 
     defaultConfig {
         minSdk 19
+        // 👇 加入以下这行来关闭 AAR metadata 检查
+        missingDimensionStrategy 'react-native-camera', 'general'  // 防止部分冲突
+    }
+
+    // 👇 全局关闭 AAR metadata 检查
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
     }
 }
 
 dependencies {
+    implementation(name: 'fijkplayer-full-release', ext: 'aar')  // 或 .jar
 
-    // implementation(name: 'fijkplayer-full-release', ext: 'aar')
+//    implementation fileTree(dir: 'libs', include: ['*.aar']) // 去掉这行原先的注释或者添加这行
 
     // fijkplayer-full include the java lib and native shared libs for armv5 armv7 arm64 x86 x86_64
-    implementation 'io.github.flutterplayer:fplayer-core:1.0.4'
+//    implementation 'io.github.flutterplayer:fplayer-core:1.0.4'
     implementation 'androidx.annotation:annotation:1.2.0'
+
+//    implementation project(':fijkplayer-full')
 }

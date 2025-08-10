@@ -15,7 +15,7 @@ const List<MediaUrl> samples = [
       title: "Protocol not found", url: "noprotocol://assets/butterfly.mp4"),
   MediaUrl(
       title: "rtsp test",
-      url: "rtsp://wowzaec2demo.streamlock.net/vod/mp4:BigBuckBunny_115k.mov"),
+      url: "rtsp://192.168.101.51:8554/live/test"),
   MediaUrl(
       title: "Sample Video 360 * 240",
       url:

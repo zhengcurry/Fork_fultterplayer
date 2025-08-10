@@ -11,7 +11,7 @@ A new Flutter plugin project.
                        DESC
   s.homepage         = 'http://example.com'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Your Company' => 'email@example.com' }
+  s.author           = { 'curry' => 'AYI0000AYI@163.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.public_header_files = 'Classes/**/*.h'
@@ -20,13 +20,13 @@ A new Flutter plugin project.
 
   s.static_framework = true
 
-  # s.preserve_paths = 'Frameworks/*.framework'
-  # s.vendored_framework = 'Framework/IJKMediaPlayer.framework'
-  # s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '"$(PODS_ROOT)/Frameworks/"' }
+#   s.preserve_paths = 'Frameworks/*.framework'
+  s.vendored_frameworks = 'Frameworks/IJKMediaPlayer.framework'
+  s.xcconfig = { 'LD_RUNPATH_SEARCH_PATHS' => '"$(PODS_ROOT)/Frameworks/"' }
 
-  s.libraries = "bz2", "z", "stdc++"
+  s.libraries = "bz2", "z", "stdc++", "c++"
 
-  s.dependency 'fplayer-core', '1.0.4'
+#   s.dependency 'fplayer-core', '1.0.4'
 
   s.ios.deployment_target = '11.0'
 

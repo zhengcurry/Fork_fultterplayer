@@ -96,11 +96,67 @@ class VideoScreenState extends State<VideoScreen> {
     await player.setOption(FOption.hostCategory, "request-screen-on", 1);
     await player.setOption(FOption.hostCategory, "request-audio-focus", 1);
     await player.setOption(FOption.playerCategory, "reconnect", 20);
-    await player.setOption(FOption.playerCategory, "framedrop", 20);
+    // 丢帧（解码速度慢时）
+    await player.setOption(FOption.playerCategory, "framedrop", 30);
     await player.setOption(FOption.playerCategory, "enable-accurate-seek", 1);
-    await player.setOption(FOption.playerCategory, "mediacodec", 1);
-    await player.setOption(FOption.playerCategory, "packet-buffering", 0);
+    // await player.setOption(FOption.playerCategory, "mediacodec", 1);
+    // 关闭缓冲
     await player.setOption(FOption.playerCategory, "soundtouch", 1);
+
+    // 关闭 AVFormat 缓冲
+    player.setOption(FOption.formatCategory, "fflags", "nobuffer");
+    player.setOption(FOption.formatCategory, "flush_packets", 1);
+
+    // 网络优化
+    // 减小探测包大小，加快打开速度
+    player.setOption(FOption.formatCategory, "probesize", 512);
+    // 减小分析时长
+    player.setOption(FOption.formatCategory, "analyzeduration", 100);
+
+
+    //skip_loop_filter这个是解码的一个参数，叫环路滤波，设置成48和0，图像清晰度对比，0比48清楚，理解起来就是，0是开启了环路滤波，过滤的是大部分，而48基本没启用环路滤波，所以清晰度更低，但是解码性能开销小
+    //skip_loop_filter（环路滤波）简言之：
+    //a:环路滤波器可以保证不同水平的图像质量。
+    //b:环路滤波器更能增加视频流的主客观质量，同时降低解码器的复杂度。
+    player.setOption(FOption.codecCategory, "skip_loop_filter", 0);
+    //视频帧率
+    player.setOption(FOption.playerCategory, "fps", 30);
+    //设置无packet缓存
+    player.setOption(FOption.playerCategory, "packet-buffering", 0);
+    //不限制拉流缓存大小
+    player.setOption(FOption.playerCategory, "infbuf", 1);
+    //设置最大缓存数量
+    player.setOption(FOption.formatCategory, "max-buffer-size", 1024);
+    //设置最小解码帧数
+    player.setOption(FOption.playerCategory, "min-frames", 3);
+    //启动预加载
+    player.setOption(FOption.playerCategory, "start-on-prepared", 1);
+    //设置分析流时长，即播放前的探测时间
+    // player.setOption(FOption.formatCategory, "analyzeduration", "2000000");
+    //开启硬解码，如果打开硬解码失败，再自动切换到软解码
+    player.setOption(FOption.playerCategory, "mediacodec", 1);
+    player.setOption(FOption.playerCategory, "mediacodec-auto-rotate", 1);
+    player.setOption(FOption.playerCategory, "mediacodec-handle-resolution-change", 1);
+
+    //player.setOption(FOption.playerCategory, "overlay-format", FOption.SDL_FCC_YV12);
+    //如果是rtsp协议，可以优先用tcp(默认是用udp)
+    player.setOption(FOption.formatCategory, "rtsp_transport", "tcp");
+
+
+    // 最大缓冲cache是3s， 有时候网络波动，会突然在短时间内收到好几秒的数据
+    // 因此需要播放器丢包，才不会累积延时
+    // 这个和第三个参数packet-buffering无关。
+    player.setOption(FOption.playerCategory, "max_cached_duration", 300);
+
+    // 设置在解析的 url 之前 （这里设置超时为5秒）
+    // 如果没有设置stimeout，在解析时（也就是avformat_open_input）把网线拔掉，av_read_frame会阻塞（时间单位是微妙）
+    player.setOption(FOption.formatCategory, "stimeout", "5000000");
+    // 最大延迟 (ms)
+    player.setOption(FOption.playerCategory, "max_delay", 100);
+
+    // 直播特有优化
+    // 用于 RTMP live 模式
+    // player.setOption(FOption.formatCategory, "rtmp_live", 1);
 
     // 播放传入的视频
     setVideoUrl(widget.url);

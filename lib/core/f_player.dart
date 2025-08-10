@@ -98,6 +98,8 @@ class FPlayer extends ChangeNotifier implements ValueListenable<FValue> {
   }
 
   Future<void> _startFromAnyState() async {
+    final startTime = DateTime.now();
+
     await _nativeSetup.future;
 
     if (state == FState.error || state == FState.stopped) {
@@ -106,15 +108,20 @@ class FPlayer extends ChangeNotifier implements ValueListenable<FValue> {
     String? source = _dataSource;
     if (state == FState.idle && source != null) {
       await setDataSource(source);
+      print("🎯 Dart 触发播放耗时 setDataSource: ${DateTime.now().difference(startTime).inMilliseconds}ms");
     }
     if (state == FState.initialized) {
       await prepareAsync();
+      print("🎯 Dart 触发播放耗时 prepareAsync: ${DateTime.now().difference(startTime).inMilliseconds}ms");
+
     }
+
     if (state == FState.asyncPreparing ||
         state == FState.prepared ||
         state == FState.completed ||
         state == FState.paused) {
       await start();
+      print("🎯 Dart 触发播放耗时 start: ${DateTime.now().difference(startTime).inMilliseconds}ms");
     }
   }
 
