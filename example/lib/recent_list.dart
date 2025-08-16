@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:streaming_shared_preferences/streaming_shared_preferences.dart';
 
 import 'app_bar.dart';
+import 'home_page.dart';
 import 'media_item.dart';
 
-const List<MediaUrl> samples = [
+final List<MediaUrl> samples = [
   MediaUrl(
       title: "Aliyun", url: "http://player.alicdn.com/video/aliyunmedia.mp4"),
   MediaUrl(title: "http 404", url: "https://fplayer.dev/butterfly.flv"),
@@ -79,6 +80,7 @@ class SamplesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    samples.insert(0,MediaUrl(title: "Test", url: globalInputValue));
     return Scaffold(
       appBar: const FAppBar.defaultSetting(title: "Online Samples"),
       body: ListView.builder(

@@ -178,7 +178,7 @@ class VideoScreenState extends State<VideoScreen> {
   Widget build(BuildContext context) {
     MediaQueryData mediaQueryData = MediaQuery.of(context);
     Size size = mediaQueryData.size;
-    double videoHeight = size.width * 9 / 16;
+    double videoHeight = size.width * 3 / 4;
     return Scaffold(
       appBar: const FAppBar.defaultSetting(title: "Video"),
       body: SingleChildScrollView(

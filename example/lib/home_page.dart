@@ -3,6 +3,8 @@ import 'package:fplayer_example/recent_list.dart';
 
 import 'app_bar.dart';
 
+String globalInputValue = "rtsp://192.168.11.123/1/h264major";
+
 class HomeItem extends StatelessWidget {
   const HomeItem({
     super.key,
@@ -36,6 +38,8 @@ class HomeItem extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   final RecentMediaList list = RecentMediaList();
 
+  final TextEditingController _controller = TextEditingController();
+
   HomeScreen({super.key});
 
   @override
@@ -59,6 +63,21 @@ class HomeScreen extends StatelessWidget {
               },
               text: "Online Samples",
             ),
+            TextField(
+              controller: _controller,
+              decoration: const InputDecoration(
+                labelText: "请输入地址",
+                border: OutlineInputBorder(),
+              ),
+            ),
+            const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                globalInputValue = _controller.text; // 把输入框的值保存
+              },
+              child: const Text("提交"),
+            ),
+            const SizedBox(height: 20),
             /*
             Container(
               color: Theme.of(context).primaryColorLight,
