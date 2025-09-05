@@ -19,41 +19,41 @@ class VideoScreenState extends State<VideoScreen> {
 
   // 视频列表
   List<VideoItem> videoList = [
-    VideoItem(
-      title: '第一集',
-      subTitle: '视频1副标题',
-      url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
-    ),
-    VideoItem(
-      title: '第二集',
-      subTitle: '视频2副标题',
-      url: 'https://www.runoob.com/try/demo_source/mov_bbb.mp4',
-    ),
-    VideoItem(
-      title: '第三集',
-      subTitle: '视频3副标题',
-      url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
-    ),
-    VideoItem(
-      title: '第四集',
-      subTitle: '视频4副标题',
-      url: 'https://www.runoob.com/try/demo_source/mov_bbb.mp4',
-    ),
-    VideoItem(
-      title: '第五集',
-      subTitle: '视频5副标题',
-      url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
-    ),
-    VideoItem(
-      title: '第六集',
-      subTitle: '视频6副标题',
-      url: 'https://www.runoob.com/try/demo_source/mov_bbb.mp4',
-    ),
-    VideoItem(
-      title: '第七集',
-      subTitle: '视频7副标题',
-      url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
-    )
+    // VideoItem(
+    //   title: '第一集',
+    //   subTitle: '视频1副标题',
+    //   url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
+    // ),
+    // VideoItem(
+    //   title: '第二集',
+    //   subTitle: '视频2副标题',
+    //   url: 'https://www.runoob.com/try/demo_source/mov_bbb.mp4',
+    // ),
+    // VideoItem(
+    //   title: '第三集',
+    //   subTitle: '视频3副标题',
+    //   url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
+    // ),
+    // VideoItem(
+    //   title: '第四集',
+    //   subTitle: '视频4副标题',
+    //   url: 'https://www.runoob.com/try/demo_source/mov_bbb.mp4',
+    // ),
+    // VideoItem(
+    //   title: '第五集',
+    //   subTitle: '视频5副标题',
+    //   url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
+    // ),
+    // VideoItem(
+    //   title: '第六集',
+    //   subTitle: '视频6副标题',
+    //   url: 'https://www.runoob.com/try/demo_source/mov_bbb.mp4',
+    // ),
+    // VideoItem(
+    //   title: '第七集',
+    //   subTitle: '视频7副标题',
+    //   url: 'http://player.alicdn.com/video/aliyunmedia.mp4',
+    // )
   ];
 
   // 倍速列表

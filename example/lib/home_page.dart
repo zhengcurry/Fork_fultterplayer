@@ -52,17 +52,17 @@ class HomeScreen extends StatelessWidget {
         builder: (ctx) => Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            HomeItem(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SamplesScreen(),
-                  ),
-                );
-              },
-              text: "Online Samples",
-            ),
+            // HomeItem(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(
+            //         builder: (context) => const SamplesScreen(),
+            //       ),
+            //     );
+            //   },
+            //   text: "Online Samples",
+            // ),
             TextField(
               controller: _controller,
               decoration: const InputDecoration(
@@ -73,7 +73,23 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
+                if(_controller.text.isEmpty){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text("请输入"),
+                      duration: Duration(seconds: 2),
+                      behavior: SnackBarBehavior.floating, // 悬浮样式，更像 Toast
+                    ),
+                  );
+                  return;
+                }
                 globalInputValue = _controller.text; // 把输入框的值保存
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SamplesScreen(),
+                  ),
+                );
               },
               child: const Text("提交"),
             ),
